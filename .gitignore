@@ -1,0 +1,25 @@
+# Credentials, runtime data and local test runs
+.kiln-local/
+.runs/
+.env*
+*.db
+*.sqlite*
+*.db-*
+*.token
+*.pem
+*.pfx
+*.key
+kubeconfig*
+__pycache__/
+*.py[cod]
+
+# Terraform local artifacts
+.terraform/
+*.tfstate*
+*.tfvars
+*.tfvars.json
+*.tfplan
+*.plan
+plan.json
+crash*.log
+*.zip
