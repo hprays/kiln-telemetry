@@ -1,0 +1,55 @@
+{
+  "source_commit": "273bd70abf5d9c10ff8909c285e39b36d7299a21",
+  "archive_sha256": "02ecaeaa4b7c5ecd42e8591c07de4450be5d0f68d0cfd8b9ac142f09d1a88c94",
+  "tracked_files": 102,
+  "extract_utc": "2026-11-25T15:29:45+00:00",
+  "path_contains_spaces_and_korean": true,
+  "gateway_port": 18470,
+  "empty_provider_state_and_runtime": true,
+  "init": "success; original dependency lock file preserved",
+  "static_checks": {
+    "fmt": "pass",
+    "validate": "pass",
+    "tflint": {
+      "issues": [],
+      "errors": []
+    }
+  },
+  "plan_policy": [
+    "PASS loopback-only, distinct-unprivileged-port, topology-budget",
+    "PASS rejected test plan for loopback-only",
+    "PASS rejected test plan for distinct-unprivileged-port"
+  ],
+  "created": [
+    "shell_script.api[0]",
+    "shell_script.api[1]",
+    "shell_script.backups",
+    "shell_script.credential",
+    "shell_script.gateway",
+    "shell_script.store"
+  ],
+  "smoke": {
+    "seeded_kilns": 6,
+    "seeded_observations": 2160,
+    "write": 201,
+    "replay": 200,
+    "conflict": 409,
+    "replicas": [
+      "kiln-1",
+      "kiln-2"
+    ],
+    "persisted_points_for_smoke_run": 1
+  },
+  "dashboard_status": 200,
+  "steady_noop_resources": 6,
+  "changed_for_uncached_measurement": [
+    "shell_script.api[0]",
+    "shell_script.api[1]"
+  ],
+  "teardown": {
+    "state_resources": 0,
+    "runtime_removed": true,
+    "listeners_closed": true
+  },
+  "finished_utc": "2026-11-25T15:33:00+00:00"
+}

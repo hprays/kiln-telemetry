@@ -33,6 +33,7 @@ flowchart LR
 |---|---|
 | 수집기 장애 | 1대 구성은 중단 중 정상 조회 0/27건. 2대 구성은 26/26건이었으며, 중단 확인 후 첫 정상 응답은 0.078초에 관측했다. 두 시험 모두 360건 중 최종 누락·중복은 0건이다. [S1 기록](scenarios/S1.md) |
 | 센서 부하 10배 | 같은 720건에서 건별 720회 요청과 p95 30.04초, 묶음 60회 요청과 p95 0.196초를 관측했다. p95는 생성부터 센서가 성공을 기록한 시점까지다. [S2 기록](scenarios/S2.md) |
+| 조회 사용자 1명 → 10명 | 초당 2회에서 20회로 늘리자 캐시 없는 DB 요약 집계가 20회에서 200회로 늘었다. 10명에서 캐시를 4초로 설정하면 DB 집계는 4회, p95는 71.6ms에서 44.9ms로 줄었다. 두 10명 조건 모두 200건 전부 200ms 이내에 응답했다. [사용자별 측정](scenarios/S2.md) |
 | 조회 캐시 | 초당 20요청에서 p95 114.9ms → 53.3ms. 캐시 4초에서 적중률 98%, 전체 집계 4/200회. 두 구성에서 200ms 기준을 충족한 유효 조회는 각각 200/200건이다. [캐시 사용 원자료](evidence/read-cache/summary.json) |
 | 격리 백업 복구 | 체크포인트 6,579건과 SHA-256 일치. 격리 복구 API 검증까지 0.820초, 체크포인트 최신 기록과 장애 선언의 차이 1.577초. 체크포인트 후 6건은 복구본의 경계 밖이다. [복구 원자료](evidence/recovery/summary.json) |
 | Terraform 재현성 | 자원 6개 삭제 후 state, 관리 디렉터리, 리스너가 비었음을 확인했다. 동일 코드로 6개를 다시 생성했고, 수집기 간 재전송과 충돌 검사를 통과했다. 다음 plan에서 변경은 0개였다. [삭제 검사](evidence/teardown-check.json) · [재생성 검사](evidence/recreate-check.json) · [마지막 plan](evidence/steady-plan.json) |
@@ -54,7 +55,9 @@ python checks/plan_policy.py terraform/plan.json --negative-controls
 terraform -chdir=terraform apply local.tfplan
 ```
 
-브라우저에서 `http://localhost:18340/`을 열면 시드 데이터의 가마 6기와 온도 곡선을 볼 수 있다. 기본 구성은 수집기 2개, 요약 캐시 4초다. 포트와 수집기 수는 `terraform/terraform.tfvars.example`을 참고해 조정한다. 게이트웨이와 API 리스너 모두 루프백으로 제한한다. 운영 메트릭은 API의 로컬 포트에서 볼 수 있으며, 센서 자격 증명은 배포 시 제한된 권한의 파일로 생성한다.
+브라우저에서 `http://127.0.0.1:18340/`을 열면 시드 데이터의 가마 6기와 온도 곡선을 볼 수 있다. 기본 구성은 수집기 2개, 요약 캐시 4초다. 포트와 수집기 수는 `terraform/terraform.tfvars.example`을 참고해 조정한다. 게이트웨이와 API 리스너 모두 루프백으로 제한한다. 운영 메트릭은 API의 로컬 포트에서 볼 수 있으며, 센서 자격 증명은 배포 시 제한된 권한의 파일로 생성한다.
+
+Windows에서 배포 ZIP을 한글과 공백이 들어간 새 경로에 풀고 위 과정을 확인했다. 기존 배포와 동시에 실행하려고 포트만 18470으로 바꿨다. 자원 6개 생성, 웹 응답, 수집기 간 중복 처리, 후속 계획의 변경 0개, 실험 자원 삭제까지 확인했다. 검증한 ZIP의 커밋과 SHA-256은 실행 기록에 있다. [새 폴더 배포 기록](evidence/clean-install.json)
 
 [온도 대시보드 캡처](evidence/captures/dashboard.png) · [정적 분석 캡처](evidence/captures/static.png) · [장애·부하 비교 캡처](evidence/captures/scenarios.png)
 
@@ -63,12 +66,14 @@ terraform -chdir=terraform apply local.tfplan
 - **S1.** 아래 명령을 수집기 1개와 2개 구성에서 각각 실행한다. 두 구성 모두 캐시를 0초로 설정한다. 시험은 프로젝트가 만든 `kiln-1`을 내렸다가 다시 시작하고, 원래 관측 시각과 저장 순번을 대조한다.
 - **S2.** 수집기 2개와 캐시 0초에서 1기당 1건/초와 10건/초를 비교한다. 피크 부하는 같은 720개 기록으로 `--batch 1`과 `--batch 12`를 각각 시험한다. `--hz 0`은 밀린 기록을 한꺼번에 적재하는 별도 시험이다.
 - **조회.** 동일한 데이터를 둔 상태로 캐시 0초와 4초를 비교한다. 20요청/초로 10초간 실행하고, 유효한 응답이 예정 시각부터 200ms 안에 도착한 비율이 99% 이상인지 확인한다. `--rate 0`은 처리량 확인용이다.
+- **사용자 증가.** 같은 데이터에 수집기 2개를 두고 캐시 0초에서 가상 사용자 1명과 10명을 시험한다. 캐시 4초에서 10명을 다시 시험한다. 아래 명령에서 `--viewers`와 출력 폴더를 조건에 맞춰 변경한다.
 - **복구.** 정상 서비스가 동작하는 동안 체크포인트를 만들고 추가로 데이터를 쓴 뒤, 체크포인트를 별도 DB로 복원해 복구용 API와 원본 DB를 대조한다.
 
 ```powershell
 python tests/experiment.py outage --label outage --out .runs/outage --ticks 60 --hz 10 --batch 12
 python tests/experiment.py load --label peak --out .runs/peak --ticks 120 --hz 10 --batch 12
 python tests/readload.py --rate 20 --seconds 10 --out .runs/read
+python tests/viewer_growth.py --viewers 10 --out .runs/viewers-ten
 python tests/recovery.py --out .runs/recovery
 ./checks/access_controls.ps1 -OutFile .runs/access.json
 ./checks/host_resources.ps1 -OutFile .runs/cost.json

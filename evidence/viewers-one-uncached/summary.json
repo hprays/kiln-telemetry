@@ -1,0 +1,24 @@
+{
+  "started_utc": "2026-11-25T15:32:04.300Z",
+  "ended_utc": "2026-11-25T15:32:13.864Z",
+  "poll_window_s": 10,
+  "viewers": 1,
+  "polls_per_viewer_per_s": 2,
+  "offered_rps": 2,
+  "offered": 20,
+  "successful": 20,
+  "failed": 0,
+  "valid_responses_by_viewer": [
+    20
+  ],
+  "cache_seconds_by_replica": {
+    "kiln-1": 0.0,
+    "kiln-2": 0.0
+  },
+  "cache_hits": 0,
+  "origin_summary_queries": 20,
+  "valid_scheduled_p95_ms": 65.17,
+  "slo_threshold_ms": 200,
+  "slo_good": 20,
+  "slo_good_pct": 100.0
+}
