@@ -35,7 +35,7 @@ $handler.UseProxy = $false
 $client = [Net.Http.HttpClient]::new($handler)
 $client.Timeout = [TimeSpan]::FromSeconds(3)
 function Status([int]$Port, [string]$Method, [string]$Route, [string]$Credential = '') {
-    $req = [Net.Http.HttpRequestMessage]::new([Net.Http.HttpMethod]::new($Method), "http://localhost:$Port$Route")
+    $req = [Net.Http.HttpRequestMessage]::new([Net.Http.HttpMethod]::new($Method), "http://127.0.0.1:$Port$Route")
     $resp = $null
     try {
         if ($Method -eq 'POST') {
