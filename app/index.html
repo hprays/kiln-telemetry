@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>가마 소성 기록실</title>
+  <link rel="stylesheet" href="/screen.css">
+  <script defer src="/screen.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">도예 공방 · 모의 센서</p>
+      <div class="mast"><h1>가마 소성 기록실</h1><button type="button" id="refresh">새로 고침</button></div>
+      <p class="subtitle">소성 회차별 온도 변화와 늦게 도착한 센서 기록을 확인합니다.</p>
+    </header>
+    <section class="plot-card" aria-labelledby="chart-heading">
+      <div class="plot-head">
+        <h2 id="chart-heading">온도 곡선</h2>
+        <div class="controls">
+          <label>가마 <select id="kiln-choice"></select></label>
+          <label>소성 회차 <select id="firing-choice"></select></label>
+        </div>
+      </div>
+      <canvas id="plot" role="img" aria-label="센서 관측 시각별 온도 곡선"></canvas>
+      <p id="plot-caption">온도 기록을 불러오는 중입니다.</p>
+    </section>
+    <div class="summary" aria-live="polite"><strong id="total">기록 조회 중</strong><span id="stamp"></span></div>
+    <section aria-label="가마별 관측 기록">
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">가마</th><th scope="col">소성 단계</th><th scope="col">마지막 온도</th><th scope="col">기록 최고</th><th scope="col">마지막 관측 (한국시간)</th><th scope="col">누적 기록</th></tr></thead>
+        <tbody id="kilns"></tbody>
+      </table></div>
+    </section>
+    <footer>센서 시뮬레이터로 생성한 데이터입니다. 화면은 3초마다 갱신됩니다. 모든 시각은 한국시간입니다.</footer>
+  </main>
+</body>
+</html>
