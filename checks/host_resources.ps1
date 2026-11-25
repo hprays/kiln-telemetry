@@ -30,7 +30,9 @@ $handler = [Net.Http.HttpClientHandler]::new()
 $handler.UseProxy = $false
 $http = [Net.Http.HttpClient]::new($handler)
 $http.Timeout = [TimeSpan]::FromSeconds(2)
+$http.DefaultRequestHeaders.ConnectionClose = $true
 $samples = [Collections.Generic.List[object]]::new()
+$errorKinds = @{}
 $ok = 0
 $errors = 0
 $clock = [Diagnostics.Stopwatch]::StartNew()
@@ -52,10 +54,20 @@ try {
         }
         $response = $null
         try {
-            $response = $http.GetAsync("http://localhost:$gateway/api/summary").GetAwaiter().GetResult()
+            $response = $http.GetAsync("http://127.0.0.1:$gateway/api/summary").GetAwaiter().GetResult()
             $body = $response.Content.ReadAsStringAsync().GetAwaiter().GetResult() | ConvertFrom-Json
-            if ($response.IsSuccessStatusCode -and $body.kilns.Count -eq 6) { $ok++ } else { $errors++ }
-        } catch { $errors++ } finally { if ($response) { $response.Dispose() } }
+            if ($response.IsSuccessStatusCode -and $body.kilns.Count -eq 6) {
+                $ok++
+            } else {
+                $errors++
+                $kind = 'response_' + [int]$response.StatusCode
+                $errorKinds[$kind] = 1 + [int]$errorKinds[$kind]
+            }
+        } catch {
+            $errors++
+            $kind = $_.Exception.GetBaseException().GetType().Name
+            $errorKinds[$kind] = 1 + [int]$errorKinds[$kind]
+        } finally { if ($response) { $response.Dispose() } }
     }
     $remainder = [math]::Floor(8000 - $clock.Elapsed.TotalMilliseconds)
     if ($remainder -gt 0) { Start-Sleep -Milliseconds ([int]$remainder) }
@@ -76,6 +88,7 @@ $kwh = $days * $hours * $watts / 1000.0
 $result = [ordered]@{
     measured = [ordered]@{
         started_at_utc = $startedAt; read_requests = 80; successful_summary_reads = $ok; errors = $errors
+        error_kinds = $errorKinds
         elapsed_s = [math]::Round($elapsed, 3)
         scope = 'gateway and both API processes; working sets can include shared pages'
         process_cpu_s = [math]::Round($last.cpu_s - $first.cpu_s, 4)

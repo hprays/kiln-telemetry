@@ -1,0 +1,14 @@
+{
+  "utc": "2026-11-25T15:15:14+00:00",
+  "result": [
+    "Apply complete! Resources: 0 added, 2 changed, 0 destroyed."
+  ],
+  "state_resources": [
+    "shell_script.api[0]",
+    "shell_script.api[1]",
+    "shell_script.backups",
+    "shell_script.credential",
+    "shell_script.gateway",
+    "shell_script.store"
+  ]
+}

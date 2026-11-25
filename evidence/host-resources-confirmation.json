@@ -1,0 +1,224 @@
+{
+  "measured": {
+    "started_at_utc": "2026-11-25T15:18:02.1012888+00:00",
+    "read_requests": 80,
+    "successful_summary_reads": 40,
+    "errors": 40,
+    "error_kinds": {
+      "TaskCanceledException": 40
+    },
+    "elapsed_s": 86.057,
+    "scope": "gateway and both API processes; working sets can include shared pages",
+    "process_cpu_s": 6.4688,
+    "cpu_percent_of_one_core": 7.517,
+    "logical_processors": 16,
+    "cpu_percent_of_all_logical_processors": 0.47,
+    "sampled_peak_working_set_mib": 79.152,
+    "sampled_peak_working_set_percent_of_physical_ram": 0.494,
+    "working_set_samples": [
+      {
+        "elapsed_s": 0.075,
+        "working_set_mib": 78.605
+      },
+      {
+        "elapsed_s": 2.25,
+        "working_set_mib": 78.676
+      },
+      {
+        "elapsed_s": 4.471,
+        "working_set_mib": 78.609
+      },
+      {
+        "elapsed_s": 6.619,
+        "working_set_mib": 78.625
+      },
+      {
+        "elapsed_s": 8.755,
+        "working_set_mib": 78.625
+      },
+      {
+        "elapsed_s": 10.896,
+        "working_set_mib": 78.637
+      },
+      {
+        "elapsed_s": 11.024,
+        "working_set_mib": 78.824
+      },
+      {
+        "elapsed_s": 13.054,
+        "working_set_mib": 78.691
+      },
+      {
+        "elapsed_s": 15.18,
+        "working_set_mib": 78.871
+      },
+      {
+        "elapsed_s": 17.315,
+        "working_set_mib": 78.961
+      },
+      {
+        "elapsed_s": 19.48,
+        "working_set_mib": 78.75
+      },
+      {
+        "elapsed_s": 21.65,
+        "working_set_mib": 78.684
+      },
+      {
+        "elapsed_s": 23.786,
+        "working_set_mib": 78.695
+      },
+      {
+        "elapsed_s": 25.919,
+        "working_set_mib": 78.699
+      },
+      {
+        "elapsed_s": 26.054,
+        "working_set_mib": 78.957
+      },
+      {
+        "elapsed_s": 28.104,
+        "working_set_mib": 78.703
+      },
+      {
+        "elapsed_s": 30.234,
+        "working_set_mib": 78.707
+      },
+      {
+        "elapsed_s": 32.39,
+        "working_set_mib": 78.895
+      },
+      {
+        "elapsed_s": 34.519,
+        "working_set_mib": 78.895
+      },
+      {
+        "elapsed_s": 36.656,
+        "working_set_mib": 78.91
+      },
+      {
+        "elapsed_s": 38.815,
+        "working_set_mib": 78.762
+      },
+      {
+        "elapsed_s": 40.932,
+        "working_set_mib": 78.902
+      },
+      {
+        "elapsed_s": 41.051,
+        "working_set_mib": 79.152
+      },
+      {
+        "elapsed_s": 43.082,
+        "working_set_mib": 78.777
+      },
+      {
+        "elapsed_s": 45.224,
+        "working_set_mib": 78.777
+      },
+      {
+        "elapsed_s": 47.356,
+        "working_set_mib": 78.773
+      },
+      {
+        "elapsed_s": 49.528,
+        "working_set_mib": 79.062
+      },
+      {
+        "elapsed_s": 51.643,
+        "working_set_mib": 79.059
+      },
+      {
+        "elapsed_s": 53.801,
+        "working_set_mib": 78.73
+      },
+      {
+        "elapsed_s": 55.948,
+        "working_set_mib": 78.73
+      },
+      {
+        "elapsed_s": 56.076,
+        "working_set_mib": 78.996
+      },
+      {
+        "elapsed_s": 58.114,
+        "working_set_mib": 78.742
+      },
+      {
+        "elapsed_s": 60.265,
+        "working_set_mib": 78.742
+      },
+      {
+        "elapsed_s": 62.401,
+        "working_set_mib": 78.746
+      },
+      {
+        "elapsed_s": 64.535,
+        "working_set_mib": 78.75
+      },
+      {
+        "elapsed_s": 66.695,
+        "working_set_mib": 79.137
+      },
+      {
+        "elapsed_s": 68.847,
+        "working_set_mib": 79.145
+      },
+      {
+        "elapsed_s": 70.994,
+        "working_set_mib": 78.805
+      },
+      {
+        "elapsed_s": 71.12,
+        "working_set_mib": 79.055
+      },
+      {
+        "elapsed_s": 73.149,
+        "working_set_mib": 78.805
+      },
+      {
+        "elapsed_s": 75.288,
+        "working_set_mib": 78.832
+      },
+      {
+        "elapsed_s": 77.403,
+        "working_set_mib": 78.836
+      },
+      {
+        "elapsed_s": 79.564,
+        "working_set_mib": 78.824
+      },
+      {
+        "elapsed_s": 81.698,
+        "working_set_mib": 78.82
+      },
+      {
+        "elapsed_s": 83.807,
+        "working_set_mib": 79.09
+      },
+      {
+        "elapsed_s": 85.932,
+        "working_set_mib": 79.094
+      },
+      {
+        "elapsed_s": 86.057,
+        "working_set_mib": 79.02
+      }
+    ],
+    "db_bytes": 536576,
+    "cloud_service_fees_krw": 0,
+    "hosting": "existing local PC"
+  },
+  "electricity_scenario": {
+    "basis": "Illustrative operating inputs; power and tariff were not measured.",
+    "assumed_incremental_watts": 18,
+    "hours_per_day": 8,
+    "active_days_per_month": 22,
+    "illustrative_krw_per_kwh": 200,
+    "assumed_monthly_active_users": 60,
+    "monthly_kwh": 3.168,
+    "monthly_krw": 633.6,
+    "krw_per_monthly_active_user": 10.56,
+    "excludes": "hardware depreciation, labor, and off-site backup"
+  }
+}

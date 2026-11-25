@@ -1,0 +1,66 @@
+{
+  "kind": "isolated_restore_from_live_primary",
+  "start_utc": "2026-11-25T15:16:07.159Z",
+  "end_utc": "2026-11-25T15:16:09.675Z",
+  "scope": "RTO ends at validated recovery API response; DNS/client cutover and detection are excluded.",
+  "checkpoint_stored_in_terraform_backup_dir": false,
+  "snapshot_count": 6579,
+  "restored_count": 6579,
+  "checkpoint_revision": 2315,
+  "last_committed_primary_revision": 2316,
+  "recovered_revision": 2315,
+  "checkpoint_bytes": 536576,
+  "rpo_s": 1.5765,
+  "rpo_definition": "declared failure UTC minus newest committed checkpoint UTC",
+  "rto_s": 0.8196,
+  "post_checkpoint_rows_lost_in_recovery_copy": 6,
+  "checkpoint_logical_sha256": "b8fc69b799b56e97c8bb0091784d7c902ec1d8cf6976851c79b61f196f430a71",
+  "recovered_logical_sha256": "b8fc69b799b56e97c8bb0091784d7c902ec1d8cf6976851c79b61f196f430a71",
+  "sqlite_integrity_check": "ok",
+  "marker_check": {
+    "expected": 6,
+    "stored_rows": 6,
+    "stored_keys": 6,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "primary_marker_check": {
+    "expected": 12,
+    "stored_rows": 12,
+    "stored_keys": 12,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "timeline": [
+    {
+      "event": "pre_checkpoint_marker_committed_after_event",
+      "utc": "2026-11-25T15:16:07.159Z"
+    },
+    {
+      "event": "online_backup_started",
+      "utc": "2026-11-25T15:16:07.217Z"
+    },
+    {
+      "event": "backup_verified",
+      "utc": "2026-11-25T15:16:07.749Z"
+    },
+    {
+      "event": "after_checkpoint_marker_committed",
+      "utc": "2026-11-25T15:16:08.776Z"
+    },
+    {
+      "event": "primary_declared_unavailable_for_recovery_exercise",
+      "utc": "2026-11-25T15:16:08.776Z"
+    },
+    {
+      "event": "sqlite_restore_completed",
+      "utc": "2026-11-25T15:16:09.150Z"
+    },
+    {
+      "event": "verified_correct_recovered_api_response",
+      "utc": "2026-11-25T15:16:09.594Z"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "started_utc": "2026-11-25T15:15:29.243Z",
+  "ended_utc": "2026-11-25T15:15:37.276Z",
+  "mode": "closed",
+  "duration_s": 8,
+  "workers": 6,
+  "offered_rate_per_s": 0,
+  "cache_seconds_by_replica": {
+    "kiln-1": 4.0,
+    "kiln-2": 4.0
+  },
+  "offered": 2557,
+  "successful": 2557,
+  "failures": 0,
+  "client_shed": 0,
+  "elapsed_with_drain_s": 8.0173,
+  "successful_rps": 318.934,
+  "http_p95_ms": 36.14,
+  "scheduled_p95_ms": 36.184,
+  "slo_threshold_ms": 200,
+  "slo_target_pct": 99.0,
+  "slo_good": 2557,
+  "slo_good_pct": 100.0,
+  "slo_met": true,
+  "node_counts": {
+    "kiln-2": 1279,
+    "kiln-1": 1278
+  },
+  "origin_summary_queries": 4,
+  "origin_query_total_ms": 289.92,
+  "cache_hits": 2553,
+  "cache_hit_pct": 99.844,
+  "process_usage": {
+    "kiln-gateway": {
+      "mean_cpu_pct_one_logical_core": 139.54,
+      "start_rss_mib": 23.887,
+      "end_rss_mib": 23.934
+    },
+    "kiln-1": {
+      "mean_cpu_pct_one_logical_core": 111.13,
+      "start_rss_mib": 26.59,
+      "end_rss_mib": 27.383
+    },
+    "kiln-2": {
+      "mean_cpu_pct_one_logical_core": 107.04,
+      "start_rss_mib": 26.836,
+      "end_rss_mib": 27.543
+    }
+  }
+}

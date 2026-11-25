@@ -1,0 +1,12 @@
+{
+  "seeded_kilns": 6,
+  "seeded_observations": 2160,
+  "write": 201,
+  "replay": 200,
+  "conflict": 409,
+  "replicas": [
+    "kiln-1",
+    "kiln-2"
+  ],
+  "persisted_points_for_smoke_run": 1
+}

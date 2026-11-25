@@ -1,0 +1,80 @@
+{
+  "timestamp_utc": "2026-11-25T15:17:25.4642813+00:00",
+  "scope": "One Windows host; same-host users can reach loopback listeners. Producer writes require the local credential.",
+  "cases": 12,
+  "failed": 0,
+  "checks": [
+    {
+      "check": "loopback_and_owner_kiln-gateway",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "check": "loopback_and_owner_kiln-1",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "check": "loopback_and_owner_kiln-2",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "check": "restricted_dacl_credential",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "check": "restricted_dacl_runtime",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "check": "dashboard_without_producer_credential",
+      "expected": 200,
+      "observed": 200,
+      "pass": true
+    },
+    {
+      "check": "gateway_denies_metrics",
+      "expected": 403,
+      "observed": 403,
+      "pass": true
+    },
+    {
+      "check": "operator_can_read_loopback_metrics",
+      "expected": 200,
+      "observed": 200,
+      "pass": true
+    },
+    {
+      "check": "gateway_denies_delete",
+      "expected": 405,
+      "observed": 405,
+      "pass": true
+    },
+    {
+      "check": "post_without_credential",
+      "expected": 401,
+      "observed": 401,
+      "pass": true
+    },
+    {
+      "check": "post_with_wrong_credential",
+      "expected": 401,
+      "observed": 401,
+      "pass": true
+    },
+    {
+      "check": "authenticated_empty_batch_reaches_validation",
+      "expected": 422,
+      "observed": 422,
+      "pass": true
+    }
+  ]
+}

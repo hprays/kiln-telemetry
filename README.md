@@ -27,9 +27,21 @@ flowchart LR
 
 두 수집기는 같은 PC와 DB를 공유한다. 이번 장애 실험의 대상은 수집 프로세스 한 대다. PC, 게이트웨이, DB 파일은 단일 장애 지점이다. 운영용으로 확장할 때는 호스트 분리, 외부 TLS, DB 복제와 호스트 밖 백업을 추가로 설계해야 한다.
 
+## 시험에서 확인한 수치
+
+| 항목 | 실측 |
+|---|---|
+| 수집기 장애 | 1대 구성은 중단 중 정상 조회 0/27건. 2대 구성은 26/26건이었으며, 중단 확인 후 첫 정상 응답은 0.078초에 관측했다. 두 시험 모두 360건 중 최종 누락·중복은 0건이다. [S1 기록](scenarios/S1.md) |
+| 센서 부하 10배 | 같은 720건에서 건별 720회 요청과 p95 30.04초, 묶음 60회 요청과 p95 0.196초를 관측했다. p95는 생성부터 센서가 성공을 기록한 시점까지다. [S2 기록](scenarios/S2.md) |
+| 조회 캐시 | 초당 20요청에서 p95 114.9ms → 53.3ms. 캐시 4초에서 적중률 98%, 전체 집계 4/200회. 두 구성에서 200ms 기준을 충족한 유효 조회는 각각 200/200건이다. [캐시 사용 원자료](evidence/read-cache/summary.json) |
+| 격리 백업 복구 | 체크포인트 6,579건과 SHA-256 일치. 격리 복구 API 검증까지 0.820초, 체크포인트 최신 기록과 장애 선언의 차이 1.577초. 체크포인트 후 6건은 복구본의 경계 밖이다. [복구 원자료](evidence/recovery/summary.json) |
+| Terraform 재현성 | 자원 6개 삭제 후 state, 관리 디렉터리, 리스너가 비었음을 확인했다. 동일 코드로 6개를 다시 생성했고, 수집기 간 재전송과 충돌 검사를 통과했다. 다음 plan에서 변경은 0개였다. [삭제 검사](evidence/teardown-check.json) · [재생성 검사](evidence/recreate-check.json) · [마지막 plan](evidence/steady-plan.json) |
+
+가용성과 처리량은 개인 PC 한 대에서 짧게 관측한 값이다. 조회 시험은 요청을 동시에 6개 보내는 폐루프에서 초당 61.34건과 318.93건을 각각 관측했다. 캐시 효과는 신규 쓰기가 멈춘 조건에서 측정했다. [캐시 없음](evidence/capacity-no-cache/summary.json) · [캐시 4초](evidence/capacity-cache/summary.json)
+
 ## 실행
 
-Windows 10 또는 11, Python 3.10 이상, Terraform 1.9 이상이 필요하다. 최초 `init`은 provider를 받아야 한다. 아래 명령은 프로젝트 루트에서 PowerShell로 실행한다.
+Windows 10 또는 11, Python 3.10 이상, Terraform 1.9 이상 2.0 미만이 필요하다. 정적 분석에는 TFLint를 사용한다. 최초 `init`은 provider를 받아야 한다. 아래 명령은 프로젝트 루트에서 PowerShell로 실행한다. [도구 버전과 배포처](THIRD_PARTY.md)
 
 ```powershell
 terraform -chdir=terraform init
@@ -43,6 +55,8 @@ terraform -chdir=terraform apply local.tfplan
 ```
 
 브라우저에서 `http://localhost:18340/`을 열면 시드 데이터의 가마 6기와 온도 곡선을 볼 수 있다. 기본 구성은 수집기 2개, 요약 캐시 4초다. 포트와 수집기 수는 `terraform/terraform.tfvars.example`을 참고해 조정한다. 게이트웨이와 API 리스너 모두 루프백으로 제한한다. 운영 메트릭은 API의 로컬 포트에서 볼 수 있으며, 센서 자격 증명은 배포 시 제한된 권한의 파일로 생성한다.
+
+[온도 대시보드 캡처](evidence/captures/dashboard.png) · [정적 분석 캡처](evidence/captures/static.png) · [장애·부하 비교 캡처](evidence/captures/scenarios.png)
 
 ## 시험 재현
 
@@ -61,6 +75,12 @@ python tests/recovery.py --out .runs/recovery
 ```
 
 각 실행의 출력 경로를 새 디렉터리로 지정한다. `terraform -chdir=terraform destroy`는 관리 중인 실습 프로세스와 서버 DB·백업을 삭제한다. 센서 대기열과 검증 결과는 `.runs/`에 남는다. 보존할 실제 데이터 대신 이 프로젝트가 생성한 실습 데이터로 실행한다.
+
+**보안 검사.** 리스너 소유자와 바인딩, 인증 파일 접근권한, 읽기·쓰기 경로 등 12개 검사를 통과했다. TFLint 0.55.1의 검사 결과는 이슈 0건, 오류 0건이었다. 초기 계획에서 API 환경값이 배포 전까지 미확정으로 남아 자체 정책 검사가 실패했다. 인증정보 교체 의존성을 Terraform의 `replace_triggered_by`로 옮긴 뒤 정상 계획과 위반 대조군 두 개를 다시 검사했다. [실행 중 접근 제어](evidence/access-controls.json) · [정적 분석](evidence/base-static.json) · [계획 정책 검사](evidence/recreate-plan.json)
+
+**자원·비용.** 수집기 2개와 게이트웨이의 합산 메모리 표본 최댓값은 79.29MiB, 전체 논리 프로세서 기준 평균 CPU는 0.94%였다. 8초간 80건을 실제 IPv4 리스너에서 조회해 모두 성공했다. 앞서 `localhost`를 사용한 두 번의 자원 측정에서는 각각 1건과 40건이 실패했다. 주소를 바꾼 뒤의 결과를 별도로 보존했다. [최초 측정](evidence/host-resources.json) · [시간 초과 재측정](evidence/host-resources-confirmation.json) · [IPv4 측정](evidence/host-resources-ipv4.json)
+
+로컬 실험의 별도 클라우드 이용료는 0원이다. PC 추가 전력 18W, 하루 8시간, 월 22일, 200원/kWh, 월 활성 사용자 60명을 넣은 예산 모델은 월 3.168kWh, 634원, 1인당 약 11원이다. 전력 및 단가는 가정값이고, 하드웨어 감가와 운영 인건비는 제외했다.
 
 ## 저장소
 

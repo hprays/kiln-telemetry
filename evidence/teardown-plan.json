@@ -1,0 +1,25 @@
+{
+  "utc": "2026-11-25T15:16:45+00:00",
+  "actions": {
+    "shell_script.api[0]": [
+      "delete"
+    ],
+    "shell_script.api[1]": [
+      "delete"
+    ],
+    "shell_script.backups": [
+      "delete"
+    ],
+    "shell_script.credential": [
+      "delete"
+    ],
+    "shell_script.gateway": [
+      "delete"
+    ],
+    "shell_script.store": [
+      "delete"
+    ]
+  },
+  "replicas": 2,
+  "cache_seconds": 4
+}

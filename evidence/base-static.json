@@ -1,0 +1,11 @@
+{
+  "utc": "2026-11-25T05:27:43+00:00",
+  "fmt": "pass",
+  "validate": "Success! The configuration is valid.",
+  "tflint": {
+    "issues": [],
+    "errors": []
+  },
+  "tflint_version": "0.55.1",
+  "terraform_version": "1.13.5"
+}

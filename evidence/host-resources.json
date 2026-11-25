@@ -1,0 +1,65 @@
+{
+  "measured": {
+    "started_at_utc": "2026-11-25T15:17:25.8096680+00:00",
+    "read_requests": 80,
+    "successful_summary_reads": 79,
+    "errors": 1,
+    "elapsed_s": 8.031,
+    "scope": "gateway and both API processes; working sets can include shared pages",
+    "process_cpu_s": 1.1875,
+    "cpu_percent_of_one_core": 14.787,
+    "logical_processors": 16,
+    "cpu_percent_of_all_logical_processors": 0.924,
+    "sampled_peak_working_set_mib": 78.977,
+    "sampled_peak_working_set_percent_of_physical_ram": 0.493,
+    "working_set_samples": [
+      {
+        "elapsed_s": 0.08,
+        "working_set_mib": 78.977
+      },
+      {
+        "elapsed_s": 2.141,
+        "working_set_mib": 78.977
+      },
+      {
+        "elapsed_s": 3.039,
+        "working_set_mib": 78.785
+      },
+      {
+        "elapsed_s": 4.041,
+        "working_set_mib": 78.785
+      },
+      {
+        "elapsed_s": 5.017,
+        "working_set_mib": 78.75
+      },
+      {
+        "elapsed_s": 6.034,
+        "working_set_mib": 78.715
+      },
+      {
+        "elapsed_s": 7.028,
+        "working_set_mib": 78.629
+      },
+      {
+        "elapsed_s": 8.031,
+        "working_set_mib": 78.652
+      }
+    ],
+    "db_bytes": 536576,
+    "cloud_service_fees_krw": 0,
+    "hosting": "existing local PC"
+  },
+  "electricity_scenario": {
+    "basis": "Illustrative operating inputs; power and tariff were not measured.",
+    "assumed_incremental_watts": 18,
+    "hours_per_day": 8,
+    "active_days_per_month": 22,
+    "illustrative_krw_per_kwh": 200,
+    "assumed_monthly_active_users": 60,
+    "monthly_kwh": 3.168,
+    "monthly_krw": 633.6,
+    "krw_per_monthly_active_user": 10.56,
+    "excludes": "hardware depreciation, labor, and off-site backup"
+  }
+}
