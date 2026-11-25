@@ -1,0 +1,48 @@
+{
+  "scenario": "load",
+  "label": "s2-peak-batch",
+  "start_utc": "2026-11-25T15:11:51.484Z",
+  "end_utc": "2026-11-25T15:12:03.537Z",
+  "firing_id": "run-fbc07fb7b1a041",
+  "sensors": 6,
+  "ticks_per_sensor": 120,
+  "offered_hz_per_sensor": 10.0,
+  "batch_max": 12,
+  "flush_ms": 200,
+  "duration_s": 11.974,
+  "client_ack_window_s": 11.9652,
+  "acknowledged": 720,
+  "records_per_s": 60.175,
+  "attempts": 60,
+  "ack_saved_requests": 60,
+  "status_counts": {
+    "201": 60
+  },
+  "deduplicated_on_server": 0,
+  "client_ack_p50_ms": 104.338,
+  "client_ack_p95_ms": 196.343,
+  "client_ack_max_ms": 204.456,
+  "ok_post_p95_ms": 94.62,
+  "max_outbox_observed": 18,
+  "outbox_remaining": 0,
+  "db_check": {
+    "expected": 720,
+    "stored_rows": 720,
+    "stored_keys": 720,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "chart_check": {
+    "kiln": "K03",
+    "points": 120,
+    "times_sequences_temperatures_match": true
+  },
+  "probe_total": 110,
+  "probe_ok": 110,
+  "probe_availability_pct": 100.0,
+  "probe_p95_ms": 90.721,
+  "fault": null,
+  "events": [],
+  "errors": []
+}

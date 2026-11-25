@@ -1,0 +1,6 @@
+event,t_s,utc,pending
+stop_requested,1.5123,2026-11-25T15:09:06.181Z,
+target_stopped,1.8506,2026-11-25T15:09:06.520Z,
+outbox_checked_from_independent_connection,4.8554,2026-11-25T15:09:09.523Z,186
+restart_requested,4.8561,2026-11-25T15:09:09.524Z,
+target_restarted,5.6685,2026-11-25T15:09:10.337Z,

@@ -1,0 +1,30 @@
+{
+  "utc": "2026-11-25T15:09:32+00:00",
+  "policy": [
+    "PASS loopback-only, distinct-unprivileged-port, topology-budget",
+    "PASS rejected test plan for loopback-only",
+    "PASS rejected test plan for distinct-unprivileged-port"
+  ],
+  "actions": {
+    "shell_script.api[0]": [
+      "no-op"
+    ],
+    "shell_script.api[1]": [
+      "create"
+    ],
+    "shell_script.backups": [
+      "no-op"
+    ],
+    "shell_script.credential": [
+      "no-op"
+    ],
+    "shell_script.gateway": [
+      "update"
+    ],
+    "shell_script.store": [
+      "no-op"
+    ]
+  },
+  "replicas": 2,
+  "cache_seconds": 0
+}

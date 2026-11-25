@@ -1,0 +1,87 @@
+{
+  "scenario": "outage",
+  "label": "dual",
+  "start_utc": "2026-11-25T15:09:58.668Z",
+  "end_utc": "2026-11-25T15:10:04.797Z",
+  "firing_id": "run-5a542235d0a24a",
+  "sensors": 6,
+  "ticks_per_sensor": 60,
+  "offered_hz_per_sensor": 10.0,
+  "batch_max": 12,
+  "flush_ms": 200,
+  "duration_s": 6.074,
+  "client_ack_window_s": 5.9378,
+  "acknowledged": 360,
+  "records_per_s": 60.629,
+  "attempts": 31,
+  "ack_saved_requests": 30,
+  "status_counts": {
+    "201": 30,
+    "200": 1
+  },
+  "deduplicated_on_server": 12,
+  "client_ack_p50_ms": 136.995,
+  "client_ack_p95_ms": 246.747,
+  "client_ack_max_ms": 402.072,
+  "ok_post_p95_ms": 105.284,
+  "max_outbox_observed": 30,
+  "outbox_remaining": 0,
+  "db_check": {
+    "expected": 360,
+    "stored_rows": 360,
+    "stored_keys": 360,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "chart_check": {
+    "kiln": "K03",
+    "points": 60,
+    "times_sequences_temperatures_match": true
+  },
+  "probe_total": 54,
+  "probe_ok": 54,
+  "probe_availability_pct": 100.0,
+  "probe_p95_ms": 81.149,
+  "fault": {
+    "confirmed_stop_s": 1.847,
+    "restart_requested_s": 4.8605,
+    "poll_period_ms": 100,
+    "first_success_after_confirmed_stop_s": 0.0782,
+    "first_success_node": "kiln-2",
+    "success_while_stopped": 26,
+    "probes_while_stopped": 26,
+    "nodes_while_stopped": [
+      "kiln-2"
+    ]
+  },
+  "events": [
+    {
+      "event": "stop_requested",
+      "t_s": 1.5159,
+      "utc": "2026-11-25T15:10:00.184Z"
+    },
+    {
+      "event": "target_stopped",
+      "t_s": 1.847,
+      "utc": "2026-11-25T15:10:00.515Z"
+    },
+    {
+      "event": "outbox_checked_from_independent_connection",
+      "t_s": 4.8597,
+      "utc": "2026-11-25T15:10:03.527Z",
+      "pending": 6
+    },
+    {
+      "event": "restart_requested",
+      "t_s": 4.8605,
+      "utc": "2026-11-25T15:10:03.528Z"
+    },
+    {
+      "event": "target_restarted",
+      "t_s": 6.0672,
+      "utc": "2026-11-25T15:10:04.734Z"
+    }
+  ],
+  "errors": []
+}

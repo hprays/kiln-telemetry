@@ -104,9 +104,9 @@ def run(args):
         if injector.is_alive():
             injector.join(timeout=68)
     finally:
-        stop.deadline = time.perf_counter() + 35
+        stop.deadline = time.perf_counter() + args.drain_timeout
         stop.set()
-        load.join(timeout=40)
+        load.join(timeout=args.drain_timeout + 5)
         done.set()
         watcher.join(timeout=3)
         if injector.is_alive():
@@ -181,9 +181,12 @@ def main():
     ap.add_argument("--hz", type=float, default=10, help="samples/s per sensor; 0 enqueues immediately")
     ap.add_argument("--batch", type=int, default=12)
     ap.add_argument("--flush-ms", type=float, default=200)
+    ap.add_argument("--drain-timeout", type=float, default=90,
+                    help="seconds to wait for delivery after production stops")
     args = ap.parse_args()
     if not (1 <= args.ticks <= 5000 and 0 <= args.hz <= 1000 and 1 <= args.batch <= 128
-            and 0 <= args.flush_ms <= 5000 and 1024 <= args.port <= 65535):
+            and 0 <= args.flush_ms <= 5000 and 5 <= args.drain_timeout <= 180
+            and 1024 <= args.port <= 65535):
         ap.error("parameter outside the bounded local test range")
     run(args)
 

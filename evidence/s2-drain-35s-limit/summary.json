@@ -1,0 +1,50 @@
+{
+  "scenario": "load",
+  "label": "s2-drain-single",
+  "start_utc": "2026-11-25T15:12:04.021Z",
+  "end_utc": "2026-11-25T15:12:39.515Z",
+  "firing_id": "run-699e34aba99b45",
+  "sensors": 6,
+  "ticks_per_sensor": 140,
+  "offered_hz_per_sensor": 0.0,
+  "batch_max": 1,
+  "flush_ms": 200,
+  "duration_s": 35.412,
+  "client_ack_window_s": 35.3978,
+  "acknowledged": 489,
+  "records_per_s": 13.814,
+  "attempts": 489,
+  "ack_saved_requests": 489,
+  "status_counts": {
+    "201": 489
+  },
+  "deduplicated_on_server": 0,
+  "client_ack_p50_ms": 18421.674,
+  "client_ack_p95_ms": 33472.045,
+  "client_ack_max_ms": 35158.47,
+  "ok_post_p95_ms": 108.096,
+  "max_outbox_observed": 837,
+  "outbox_remaining": 351,
+  "db_check": {
+    "expected": 840,
+    "stored_rows": 489,
+    "stored_keys": 489,
+    "missing": 351,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "chart_check": {
+    "kiln": "K03",
+    "points": 82,
+    "times_sequences_temperatures_match": false
+  },
+  "probe_total": 325,
+  "probe_ok": 325,
+  "probe_availability_pct": 100.0,
+  "probe_p95_ms": 98.508,
+  "fault": null,
+  "events": [],
+  "errors": [
+    "TimeoutError: outbox did not drain; its durable contents were retained"
+  ]
+}

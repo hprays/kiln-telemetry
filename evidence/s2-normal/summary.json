@@ -1,0 +1,48 @@
+{
+  "scenario": "load",
+  "label": "s2-normal",
+  "start_utc": "2026-11-25T15:10:55.516Z",
+  "end_utc": "2026-11-25T15:11:06.866Z",
+  "firing_id": "run-2673e71ada3448",
+  "sensors": 6,
+  "ticks_per_sensor": 12,
+  "offered_hz_per_sensor": 1.0,
+  "batch_max": 1,
+  "flush_ms": 200,
+  "duration_s": 11.309,
+  "client_ack_window_s": 11.2629,
+  "acknowledged": 72,
+  "records_per_s": 6.393,
+  "attempts": 72,
+  "ack_saved_requests": 72,
+  "status_counts": {
+    "201": 72
+  },
+  "deduplicated_on_server": 0,
+  "client_ack_p50_ms": 194.042,
+  "client_ack_p95_ms": 385.644,
+  "client_ack_max_ms": 462.913,
+  "ok_post_p95_ms": 88.204,
+  "max_outbox_observed": 6,
+  "outbox_remaining": 0,
+  "db_check": {
+    "expected": 72,
+    "stored_rows": 72,
+    "stored_keys": 72,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_rows": 0
+  },
+  "chart_check": {
+    "kiln": "K03",
+    "points": 12,
+    "times_sequences_temperatures_match": true
+  },
+  "probe_total": 104,
+  "probe_ok": 104,
+  "probe_availability_pct": 100.0,
+  "probe_p95_ms": 73.537,
+  "fault": null,
+  "events": [],
+  "errors": []
+}

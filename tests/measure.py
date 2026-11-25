@@ -4,6 +4,7 @@ import json
 import math
 import sqlite3
 import time
+from contextlib import closing
 from datetime import datetime, timezone
 from http.client import HTTPConnection, HTTPException
 from pathlib import Path
@@ -69,7 +70,8 @@ def sensor_readings(firing, sequence, observed):
 
 def readback(database, firing, expected):
     # Separately enumerate the persisted keys, without trusting the ACK response.
-    with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True, timeout=5) as conn:
+    uri = database.resolve().as_uri() + "?mode=ro"
+    with closing(sqlite3.connect(uri, uri=True, timeout=5)) as conn:
         rows = conn.execute("SELECT kiln_id, sequence FROM readings WHERE firing_id = ?", (firing,)).fetchall()
     unique = set(rows)
     return {"expected": len(expected), "stored_rows": len(rows), "stored_keys": len(unique),
