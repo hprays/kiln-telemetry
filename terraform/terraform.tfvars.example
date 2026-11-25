@@ -1,0 +1,3 @@
+ingress_port  = 18340
+replicas      = 2
+cache_seconds = 4
