@@ -1,5 +1,7 @@
 # 가마 온도 기록 복구
 
+[최종 보고서 PDF](docs/REPORT.pdf) · [같은 내용의 Markdown](docs/REPORT.md) · [AI 활용 기록](ai-log.md) · [평가 항목별 증빙](docs/CHECKLIST.md)
+
 도예 실습에서 소성이 끝난 뒤 온도 곡선을 되짚어 보는 상황을 가정한다. 수집 서버가 멈춘 동안에도 가상 센서는 시각·온도·순번을 기록한다. 서버가 돌아오면 센서가 밀린 값을 전송하고, 같은 기록이 두 번 도착해도 DB에는 한 건만 남아야 한다.
 
 실습 담당자는 소성 회차별로 온도가 언제 떨어졌는지 확인하고, 수강생은 같은 그래프를 조회한다. 쓰기는 센서에만 허용한다. 한 PC의 대시보드를 전제로 한 모의 실습이며, 수강생 열 명의 조회는 독립된 가상 사용자 열 명으로 재현했다.
@@ -131,6 +133,6 @@ python tests/recovery.py --out .runs/recovery
 
 ## 저장소
 
-안내서의 배점별 확인 근거와 남은 제출 항목은 [과제 점검표](docs/CHECKLIST.md)에 정리했다. IPv4 리스너에서 재실행한 접근 검사 12건도 모두 통과했다. [접근 검사 원자료](evidence/access-controls-ipv4.json)
+IPv4 리스너에서 재실행한 접근 검사 12건도 모두 통과했다. [접근 검사 원자료](evidence/access-controls-ipv4.json)
 
 [hprays/kiln-telemetry](https://github.com/hprays/kiln-telemetry)
